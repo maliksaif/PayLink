@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login_fragment">
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.pay.link.presentation.ui.fragments.auth.login.LoginFragment"
+        android:label="Login Fragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            app:popUpToInclusive="true"
+            android:id="@+id/to_home"
+            app:destination="@id/home_nav_graph" />
+    </fragment>
+
+
+    <navigation
+        android:id="@+id/home_nav_graph"
+        android:label="Home Navigation Graph"
+        app:startDestination="@navigation/home_nav_graph" />
+
+</navigation>
