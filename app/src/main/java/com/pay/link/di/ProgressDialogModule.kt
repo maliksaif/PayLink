@@ -1,4 +1,4 @@
-package com.pay.link.domain.module
+package com.pay.link.di
 
 import android.app.Activity
 import com.pay.link.presentation.utils.CustomProgressDialog

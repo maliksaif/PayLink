@@ -1,4 +1,4 @@
-package com.pay.link.domain.module
+package com.pay.link.di
 
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module

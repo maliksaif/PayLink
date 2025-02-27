@@ -3,6 +3,9 @@ package com.pay.link.presentation.ui.fragments.auth.login
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.pay.link.R
@@ -28,8 +31,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
     LoginViewModel::class
 ) {
 
-    @Inject lateinit var progressDialog: CustomProgressDialog
-    @Inject lateinit var snackBar : SnackBarManager
+    @Inject
+    lateinit var progressDialog: CustomProgressDialog
+    @Inject
+    lateinit var snackBar: SnackBarManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,26 +55,39 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
     }
 
     private fun observeViewState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewState.collect { viewState ->
 
-        viewModel.viewModelScope.launch {
-            viewModel.viewState.collect { viewState ->
-                // Update UI based on viewState
-
-                binding.loginActionButton.isEnabled = viewState.isButtonEnabled
+                    binding.loginActionButton.isEnabled = viewState.isButtonEnabled
+                }
             }
         }
-
     }
+
 
     private fun observeViewEffect() {
 
-        viewModel.viewModelScope.launch {
-            viewModel.viewEffect.collect { viewEffect ->
-                when(viewEffect){
-                    is Loading -> progressDialog.show(viewEffect.isLoading,getString(R.string.please_wait))
-                    NavigateToHome -> findNavController().navigate(toHome())
-                    is ShowErrorSnackBar -> snackBar.showErrorSnackBar(binding.root,viewEffect.message)
-                    is ShowSuccessSnackBar -> snackBar.showSuccessSnackBar(binding.root,viewEffect.message)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewEffect.collect { viewEffect ->
+                    when (viewEffect) {
+                        is Loading -> progressDialog.show(
+                            viewEffect.isLoading,
+                            getString(R.string.please_wait)
+                        )
+
+                        NavigateToHome -> findNavController().navigate(toHome())
+                        is ShowErrorSnackBar -> snackBar.showErrorSnackBar(
+                            binding.root,
+                            viewEffect.message
+                        )
+
+                        is ShowSuccessSnackBar -> snackBar.showSuccessSnackBar(
+                            binding.root,
+                            viewEffect.message
+                        )
+                    }
                 }
             }
         }

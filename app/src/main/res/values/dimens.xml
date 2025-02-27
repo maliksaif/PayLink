@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <dimen name="text_x_small">10sp</dimen>
     <dimen name="text_small">12sp</dimen>
     <dimen name="text_medium">14sp</dimen>
@@ -14,6 +15,8 @@
 
 
 
+    <dimen name="_0dp">0dp</dimen>
+    <dimen name="_1dp">1dp</dimen>
     <dimen name="_2dp">2dp</dimen>
     <dimen name="_4dp">4dp</dimen>
     <dimen name="_8dp">8dp</dimen>

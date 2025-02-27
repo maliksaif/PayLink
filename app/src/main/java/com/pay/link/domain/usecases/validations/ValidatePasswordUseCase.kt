@@ -6,7 +6,7 @@ import javax.inject.Inject
 class ValidatePasswordUseCase @Inject constructor() {
 
     companion object {
-        const val MIN_PASSWORD_LENGTH = 8
+        const val MIN_PASSWORD_LENGTH = 6
     }
 
     operator fun invoke(password: String): Boolean {
