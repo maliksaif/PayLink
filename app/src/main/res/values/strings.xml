@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PayLink</string>
+    <string name="email_hint">Enter email</string>
+    <string name="password_hint">Enter password</string>
+    <string name="login">Login</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="loading">Loading</string>
+    <string name="image_description_sign_out_image">Sign out Image</string>
+    <string name="welcome">Welcome</string>
+    <string name="transfer">Transfer</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="balance">Balance</string>
+    <string name="account_number">Account Number</string>
+    <string name="account_holder">Account Holder</string>
+    <string name="image_description_bank_logo">Bank Logo</string>
+    <string name="currency_format">$%1$d</string>
 </resources>

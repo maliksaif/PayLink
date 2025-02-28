@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116279541907",
+    "project_id": "vpd-money-c3872",
+    "storage_bucket": "vpd-money-c3872.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116279541907:android:28267c971db2db37f64d66",
+        "android_client_info": {
+          "package_name": "com.pay.link"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXvgXVUSY9VCIhSzeNXeJixL7tHrRA_mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
