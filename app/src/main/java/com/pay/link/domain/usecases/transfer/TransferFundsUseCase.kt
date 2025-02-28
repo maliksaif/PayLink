@@ -11,7 +11,7 @@ class TransferFundsUseCase @Inject constructor(
     private val transactionRepository: TransactionRepository
 ) {
     suspend operator fun invoke(sourceId: Int, destinationId: Int, amount: Double) {
-        val accounts = accountRepository.getAccounts().first()
+        val accounts = accountRepository.getAccounts()
         val sourceAccount = accounts.find { it.id == sourceId }!!
         val destinationAccount = accounts.find { it.id == destinationId }!!
 

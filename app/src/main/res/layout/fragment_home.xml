@@ -1,11 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/_8dp"
     tools:context=".presentation.ui.fragments.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/welcome_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_sign_out"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_view_sign_out"
+        tools:layout_editor_absoluteX="8dp" />
 
+    <ImageView
+        android:id="@+id/image_view_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_description_sign_out_image"
+        android:padding="@dimen/_8dp"
+        android:src="@drawable/ic_sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/account_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:clipToPadding="true"
+        android:layout_marginTop="@dimen/_4dp"
+        android:layout_marginBottom="@dimen/_4dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/transfer_action_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view_sign_out"
+        tools:listitem="@layout/item_account" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/transfer_action_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4dp"
+        android:text="@string/transfer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/transaction_history_action_button"
+        app:shapeAppearance="@style/RoundedSquare" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/transaction_history_action_button"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_4dp"
+        android:text="@string/transaction_history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/transfer_action_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearance="@style/RoundedSquare" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
