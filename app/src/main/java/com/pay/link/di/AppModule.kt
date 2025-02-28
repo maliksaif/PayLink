@@ -2,10 +2,15 @@ package com.pay.link.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.pay.link.data.repositories.auth.AuthRepository
+import com.pay.link.domain.repository.AccountRepository
+import com.pay.link.domain.usecases.accounts.DeleteAllAccountsUseCase
+import com.pay.link.domain.usecases.accounts.GenerateMockAccountDataUseCase
 import com.pay.link.domain.usecases.auth.GetCurrentUserUseCase
 import com.pay.link.domain.usecases.auth.SignInUseCase
 import com.pay.link.domain.usecases.auth.SignOutUseCase
 import com.pay.link.domain.usecases.auth.SignUpUseCase
+import com.pay.link.domain.usecases.common.GenerateAccountNumberUseCase
+import com.pay.link.domain.usecases.common.GenerateRandomNameUseCase
 import com.pay.link.domain.usecases.validations.ValidateEmailAddressUseCase
 import com.pay.link.domain.usecases.validations.ValidatePasswordUseCase
 import dagger.Module
@@ -51,6 +56,26 @@ object AppModule {
     @Provides
     fun provideGetCurrentUserUseCase(authRepository: AuthRepository): GetCurrentUserUseCase {
         return GetCurrentUserUseCase(authRepository)
+    }
+
+    @Provides
+    fun provideGenerateAccountNumberUseCase() : GenerateAccountNumberUseCase {
+        return GenerateAccountNumberUseCase()
+    }
+
+    @Provides
+    fun provideGenerateMockAccountDataUseCase(accountRepository: AccountRepository) : GenerateMockAccountDataUseCase {
+        return GenerateMockAccountDataUseCase(accountRepository)
+    }
+
+    @Provides
+    fun provideGenerateRandomNameUseCase() : GenerateRandomNameUseCase {
+        return GenerateRandomNameUseCase()
+    }
+
+    @Provides
+    fun provideDeleteAllAccounts(accountRepository: AccountRepository) : DeleteAllAccountsUseCase {
+        return DeleteAllAccountsUseCase(accountRepository)
     }
 
 }
