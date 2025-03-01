@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeUserAuthState(){
         viewModel.isUserLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
-                navController.navigate(R.id.home_nav_graph)
+                navController.navigate(R.id.home_fragment)
             } else {
                 navController.navigate(R.id.login_fragment)
             }

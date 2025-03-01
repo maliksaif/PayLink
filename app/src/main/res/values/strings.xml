@@ -14,4 +14,19 @@
     <string name="account_holder">Account Holder</string>
     <string name="image_description_bank_logo">Bank Logo</string>
     <string name="currency_format">$%1$d</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="proceed">Proceed</string>
+    <string name="back">Back</string>
+    <string name="amount">Amount</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="transfer_amount">Transfer Amount</string>
+    <string name="transfer_from">Transfer From</string>
+    <string name="transfer_to">Transfer To</string>
+    <string name="balance_0_0">Balance $0.0</string>
+    <string name="balance_currency_format">Balance : %1$.2f</string>
+    <string name="close">Close</string>
+    <string name="confirm_transfer">Confirm Transfer</string>
+    <string name="confirm">Confirm</string>
+    <string name="transfer_success">Transaction completed! The amount has been transferred successfully.</string>
 </resources>

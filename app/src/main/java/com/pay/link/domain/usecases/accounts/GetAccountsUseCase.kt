@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetAccountsUseCase @Inject constructor(
     private val repository: AccountRepository
 ) {
-    operator fun invoke(): List<Account> = repository.getAccounts()
+   operator fun invoke(): List<Account> = repository.getAccounts()
 }

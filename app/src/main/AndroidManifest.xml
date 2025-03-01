@@ -21,9 +21,6 @@
             android:value="MODE_NIGHT_NO" />
 
         <activity
-            android:name=".presentation.ui.activities.HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.activities.main.MainActivity"
             android:exported="true">
             <intent-filter>

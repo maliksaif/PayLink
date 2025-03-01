@@ -12,21 +12,39 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/to_home"
-            app:destination="@id/home_nav_graph"
+            app:destination="@id/home_fragment"
             app:popUpTo="@id/login_fragment"
             app:popUpToInclusive="true" />
     </fragment>
 
-    <navigation
-        android:id="@+id/home_nav_graph"
-        app:startDestination="@id/home_fragment">
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.pay.link.presentation.ui.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
 
-        <fragment
-            android:id="@+id/home_fragment"
-            android:name="com.pay.link.presentation.ui.fragments.home.HomeFragment"
-            android:label="fragment_home"
-            tools:layout="@layout/fragment_home" />
 
-    </navigation>
+        <action
+            android:id="@+id/to_transfer"
+            app:destination="@id/transfer_fragment" />
+
+        <action
+            android:id="@+id/to_transaction_history"
+            app:destination="@id/transaction_history_fragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/transfer_fragment"
+        android:name="com.pay.link.presentation.ui.fragments.transfer.TransferFragment"
+        android:label="fragment_transfer"
+        tools:layout="@layout/fragment_transfer"/>
+
+    <fragment
+        android:id="@+id/transaction_history_fragment"
+        android:name="com.pay.link.presentation.ui.fragments.history.TransactionHistoryFragment"
+        android:label="fragment_transaction_history"
+        tools:layout="@layout/fragment_transaction_history" />
 
 </navigation>

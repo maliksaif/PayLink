@@ -32,6 +32,6 @@ interface TransactionDao {
         ORDER BY t.timestamp DESC
         """
     )
-    fun getTransactionsWithAccountNames(): Flow<List<TransactionWithAccountNames>>
+    fun getTransactionsWithAccountNames(): List<TransactionWithAccountNames>
 }
 
