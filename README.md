@@ -29,8 +29,6 @@ This project follows Clean Architecture with the MVVM (Model-View-ViewModel) pat
 4. **Run the app** on an emulator or a physical device.
 
 ## 📌 Future Enhancements
-- 🔹 Implement Jetpack Navigation Component for better navigation management.
-- 🔹 Improve UI with Material Design components.
 - 🔹 Add unit and UI tests for better reliability.
 
 
