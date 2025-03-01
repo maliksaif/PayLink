@@ -17,14 +17,40 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logo_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_20dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundedSquare" />
+
+
+        <TextView
+            android:id="@+id/tag_line_text_view"
+            android:textSize="@dimen/text_medium"
+            style="@style/TextAppearance.PayLink.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12dp"
+            android:text="@string/instant_transfer"
+            android:textColor="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_image_view" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
             android:hint="@string/email_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tag_line_text_view">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_et"
@@ -32,9 +58,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:lines="1"
-                android:maxLines="1"
                 android:maxLength="255"
-                />
+                android:maxLines="1" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,26 +82,25 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:maxLines="1"
                 android:maxLength="255"
-                />
+                android:maxLines="1" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.button.MaterialButton
-            android:padding="@dimen/_16dp"
-            app:shapeAppearance="@style/RoundedSquare"
             android:id="@+id/login_action_button"
-            android:text="@string/login"
-            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_32dp"
+            android:enabled="false"
+            android:padding="@dimen/_16dp"
+            android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_til"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:shapeAppearance="@style/RoundedSquare" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

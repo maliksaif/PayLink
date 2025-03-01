@@ -36,5 +36,6 @@
     <string name="cancel">Cancel</string>
     <string name="source_account">Source Account</string>
     <string name="destination_account">Destination Account</string>
+    <string name="instant_transfer">PayLink – Fast. Secure. Seamless.</string>
 
 </resources>
