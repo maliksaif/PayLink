@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -33,6 +34,11 @@ class CustomProgressDialog @Inject constructor() : DefaultLifecycleObserver {
             setContentView(LayoutInflater.from(activity).inflate(R.layout.dialog_progress, null).also { view ->
                 messageTextView = view.findViewById(R.id.progressMessage)
             })
+
+            window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 

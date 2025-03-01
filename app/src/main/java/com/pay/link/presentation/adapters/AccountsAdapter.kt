@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pay.link.R
 import com.pay.link.databinding.ItemAccountBinding
 import com.pay.link.domain.models.Account
+import com.pay.link.domain.models.BankName
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -24,6 +25,8 @@ class AccountsAdapter(
                 accountNumberValue.text = account.number
 //                accountBalanceValue.text =
 //                    accountBalanceValue.context.getString(R.string.currency_format, account.balance)
+
+                binding.bankIcon.setImageResource(BankName.getBankLogo(account.bankName))
 
                 val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US).apply {
                     maximumFractionDigits = 2

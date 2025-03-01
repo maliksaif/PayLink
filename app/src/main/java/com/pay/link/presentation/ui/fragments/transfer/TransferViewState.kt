@@ -8,7 +8,8 @@ data class TransferViewState(
     var destinationAccount: Account? = null,
     var amountToTransfer: Double = 0.0,
     var amountError : String? = null,
-    var isTransferButtonEnabled : Boolean = false
+    var isTransferButtonEnabled : Boolean = false,
+    val isLoading : Boolean = false
 )
 
 

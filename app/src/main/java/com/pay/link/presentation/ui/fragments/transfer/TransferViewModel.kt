@@ -29,10 +29,11 @@ class TransferViewModel @Inject constructor(
     init {
 
         viewModelScope.launch {
+            setState { copy(isLoading = true) }
             val accounts = withContext(Dispatchers.IO) {
                 getAccountsUseCase()
             }
-            setState { copy(accounts = accounts) }
+            setState { copy(accounts = accounts, isLoading = false) }
             sendEffect(SetSourceDestinationAdapters(accounts))
         }
 

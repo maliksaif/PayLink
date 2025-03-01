@@ -135,21 +135,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     * */
 
     private fun navigateToTransfer() {
-        val navController = findNavController()
-        if (navController.currentDestination?.id == R.id.home_fragment) {
-            navController.navigate(toTransfer())
-        } else {
-            Log.e(TAG, "NavController is in an invalid state")
-        }
+        if(isAdded){
+
+            val navController = findNavController()
+            if (navController.currentDestination?.id == R.id.home_fragment) {
+                navController.navigate(toTransfer())
+            } else Log.e(TAG, "NavController is in an invalid state")
+
+        }else
+            Log.e(TAG, "Fragment is not added to the activity")
+
     }
 
     private fun navigateToTransactionHistory() {
-        val navController = findNavController()
-        if (navController.currentDestination?.id == R.id.home_fragment) {
-            navController.navigate(toTransactionHistory())
-        } else {
-            Log.e(TAG, "NavController is in an invalid state")
-        }
+        if(isAdded) {
+            val navController = findNavController()
+            if (navController.currentDestination?.id == R.id.home_fragment) {
+                navController.navigate(toTransactionHistory())
+            } else
+                Log.e(TAG, "NavController is in an invalid state")
+        }else
+            Log.e(TAG, "Fragment is not added to the activity")
     }
 
     companion object {

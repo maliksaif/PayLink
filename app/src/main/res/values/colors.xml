@@ -35,4 +35,11 @@
 
     <color name="semi_transparent">#99000000</color>
 
+    <color name="ash_white">#FFF5F5F5</color>
+    <color name="soft_ash">#FFECECEC</color>
+    <color name="light_ash">#FFDADADA</color>
+    <color name="warm_ash">#FFE0E0E0</color>
+    <color name="cool_ash">#FFDEDEDE</color>
+    <color name="misty_ash">#FFEEEEEE</color>
+
 </resources>

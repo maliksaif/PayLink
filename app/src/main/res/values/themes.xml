@@ -4,6 +4,7 @@
 
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundTint">@color/misty_ash</item>
 
         <item name="colorPrimaryContainer">@color/light_blue</item>
         <item name="colorOnPrimaryContainer">@color/black</item>

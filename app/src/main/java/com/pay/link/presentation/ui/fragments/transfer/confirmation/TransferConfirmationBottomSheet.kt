@@ -1,6 +1,5 @@
 package com.pay.link.presentation.ui.fragments.transfer.confirmation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pay.link.R
 import com.pay.link.databinding.BottomSheetTransferConfirmationBinding
 import com.pay.link.domain.models.Account
+import com.pay.link.domain.models.BankName
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -57,17 +57,17 @@ class TransferConfirmationBottomSheet : BottomSheetDialogFragment() {
         }
         binding.amountTextViewValue.text = currencyFormat.format(amount?.toDoubleOrNull() ?: 0.0)
 
+
         sourceAccount?.let {
             binding.sourceAccountNameValue.text = it.holder
             binding.sourceAccountNumberValue.text = it.number
-            // Future enhancements
-//            binding.sourceAccountLogo.setImageResource(it.bankLogo)
+            binding.sourceAccountLogo.setImageResource(BankName.getBankLogo(it.bankName))
         }
 
         destinationAccount?.let {
             binding.destinationAccountNameValue.text = it.holder
             binding.destinationAccountNumberValue.text = it.number
-//            binding.destinationAccountLogo.setImageResource(it.bankLogo)
+            binding.destinationAccountLogo.setImageResource(BankName.getBankLogo(it.bankName))
         }
 
         // Notify the fragment when confirm button is clicked

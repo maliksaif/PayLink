@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/TextAppearance.PayLink.Headline2"
+        style="@style/TextAppearance.PayLink.Subtitle"
         android:layout_width="0dp"
         android:gravity="center_vertical"
         android:layout_height="wrap_content"

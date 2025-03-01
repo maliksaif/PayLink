@@ -2,6 +2,7 @@ package com.pay.link.presentation.ui.fragments.home
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.pay.link.domain.models.BankName
 import com.pay.link.domain.usecases.accounts.DeleteAllAccountsUseCase
 import com.pay.link.domain.usecases.accounts.GenerateMockAccountDataUseCase
 import com.pay.link.domain.usecases.accounts.GetAccountsUseCase
@@ -52,12 +53,13 @@ class HomeViewModel @Inject constructor(
     init {
 
         checkAndGenerateMockData()
+
     }
 
     private fun checkAndGenerateMockData() {
 
         viewModelScope.launch {
-            setState { copy( isLoading = true) }
+            setState { copy(isLoading = true) }
             mutex.withLock {
                 withContext(Dispatchers.IO) {
                     val existingAccounts = getAccountsUseCase()
@@ -84,11 +86,14 @@ class HomeViewModel @Inject constructor(
                 val mockName = generateRandomNameUseCase()
                 val mockNumber = generateAccountNumberUseCase()
                 val mockBalance = (1..5000).random().toDouble()
+                val mockBank = BankName.getRandomBank()
+
 
                 generateMockAccountDataUseCase(
                     name = mockName,
                     number = mockNumber,
-                    balance = mockBalance
+                    balance = mockBalance,
+                    bankName = mockBank
                 )
             }
         }.onFailure { error ->
@@ -103,18 +108,24 @@ class HomeViewModel @Inject constructor(
             is OnAccountClicked -> {
                 // TODO if needed for account details
             }
+
             OnTransactionHistoryClicked -> sendEffect(NavigateToTransactionHistory)
             OnTransferClicked -> sendEffect(NavigateToTransfer)
-            OnRefresh ->  checkAndGenerateMockData()
+            OnRefresh -> checkAndGenerateMockData()
             OnSignOutClicked -> {
-                 val response = signOutUseCase()
+                val response = signOutUseCase()
 
-                if(response.isSuccess){
+                if (response.isSuccess) {
                     sendEffect(NavigateToSignIn)
-                }else {
-                    sendEffect(ShowErrorSnackbar(response.exceptionOrNull()?.message ?: "Failed to sign out"))
+                } else {
+                    sendEffect(
+                        ShowErrorSnackbar(
+                            response.exceptionOrNull()?.message ?: "Failed to sign out"
+                        )
+                    )
                 }
             }
+
             OnSignOutConfirmation -> {
 
             }

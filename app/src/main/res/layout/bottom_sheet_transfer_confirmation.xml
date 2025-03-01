@@ -67,12 +67,14 @@
         android:id="@+id/source_account_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/ash_white"
         app:cardCornerRadius="@dimen/_8dp"
         app:cardElevation="@dimen/_1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transfer_from_label">
+        app:layout_constraintTop_toBottomOf="@+id/transfer_from_label"
+        app:strokeColor="@color/red"
+        app:strokeWidth="@dimen/_0.5dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,6 +88,7 @@
                 style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/charcoal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="John Doe" />
@@ -99,14 +102,15 @@
                 app:layout_constraintTop_toBottomOf="@id/source_account_name_value"
                 tools:text="1234 5678 9101" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/source_account_logo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_bank"
+                android:src="@drawable/ic_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/RoundedSquare" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -140,12 +144,14 @@
         android:id="@+id/destination_account_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/ash_white"
         app:cardCornerRadius="@dimen/_8dp"
         app:cardElevation="@dimen/_1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transfer_to_label">
+        app:layout_constraintTop_toBottomOf="@+id/transfer_to_label"
+        app:strokeColor="@color/green"
+        app:strokeWidth="@dimen/_0.5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -157,6 +163,7 @@
                 style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/charcoal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Jane Smith" />
@@ -170,14 +177,15 @@
                 app:layout_constraintTop_toBottomOf="@id/destination_account_name_value"
                 tools:text="9876 5432 1098" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/destination_account_logo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_bank"
+                android:src="@drawable/ic_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/RoundedSquare" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,5 +6,9 @@ data class Account(
     val id : Int,
     val holder : String,
     val number : String,
-    val balance : Double
+    val balance : Double,
+    val bankName : String
 ) : Serializable
+
+
+

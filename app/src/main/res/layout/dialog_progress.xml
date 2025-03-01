@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@android:color/transparent"
     android:visibility="visible">
 
     <com.google.android.material.card.MaterialCardView
@@ -12,15 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/_20dp"
+        android:backgroundTint="@color/white"
         android:padding="@dimen/_24dp"
         app:cardCornerRadius="@dimen/_12dp"
         app:cardElevation="@dimen/_4dp"
-        android:layout_margin="@dimen/_20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/charcoal"
+        app:strokeColor="@color/light_gray"
         app:strokeWidth="@dimen/_1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

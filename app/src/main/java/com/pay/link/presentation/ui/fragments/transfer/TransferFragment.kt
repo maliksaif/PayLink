@@ -12,11 +12,11 @@ import com.pay.link.databinding.FragmentTransferBinding
 import com.pay.link.domain.models.Account
 import com.pay.link.presentation.adapters.AccountAutoCompleteAdapter
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.NavigateBack
-import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.ShowTransferConfirmationBottomSheet
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.OnTransferSuccess
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.SetSourceDestinationAdapters
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.ShowErrorSnackBar
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.ShowSuccessSnackBar
+import com.pay.link.presentation.ui.fragments.transfer.TransferViewEffect.ShowTransferConfirmationBottomSheet
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEvent.OnAmountToTransferChanged
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEvent.OnBackClicked
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEvent.OnDestinationAccountSelected
@@ -105,6 +105,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.viewState.collect { viewState ->
+                progressDialog.show(viewState.isLoading)
 
                 binding.proceedActionButton.isEnabled = viewState.isTransferButtonEnabled
                 binding.amountEditText.error = viewState.amountError
