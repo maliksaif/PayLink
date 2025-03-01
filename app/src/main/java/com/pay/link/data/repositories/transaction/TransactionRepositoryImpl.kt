@@ -18,7 +18,7 @@ class TransactionRepositoryImpl @Inject constructor(private val transactionDao: 
         }
     }
 
-    override fun getTransactionsWithAccountNames(): Flow<List<TransactionWithAccountNames>> {
+    override fun getTransactionsWithAccountNames(): List<TransactionWithAccountNames> {
         return transactionDao.getTransactionsWithAccountNames()
     }
 

@@ -12,15 +12,19 @@ class MainViewModel @Inject constructor(
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) : ViewModel() {
 
-    private val _isUserLoggedIn = MutableLiveData<Boolean>()
-    val isUserLoggedIn: LiveData<Boolean> get() = _isUserLoggedIn
+    private val _isUserLoggedInLiveData = MutableLiveData<Boolean>()
+    val isUserLoggedInLiveData: LiveData<Boolean> = _isUserLoggedInLiveData
 
     init {
-        checkUserStatus()
+        checkAuthState()
     }
 
-    private fun checkUserStatus() {
-        val currentUser = getCurrentUserUseCase()
-        _isUserLoggedIn.value = currentUser != null
+    private fun checkAuthState() {
+        _isUserLoggedInLiveData.value = getCurrentUserUseCase() != null
+    }
+
+    fun updateAuthState() {
+        _isUserLoggedInLiveData.value = getCurrentUserUseCase() != null
     }
 }
+

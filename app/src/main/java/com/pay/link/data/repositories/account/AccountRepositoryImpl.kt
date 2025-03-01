@@ -11,23 +11,36 @@ class AccountRepositoryImpl @Inject constructor(private val accountDao: AccountD
 
     override fun getAccounts(): List<Account> {
         return accountDao.getAllAccounts().map { account ->
-            Account(account.id, account.accountHolder, account.accountNumber, account.balance)
+            Account(
+                id = account.id,
+                holder = account.accountHolder,
+                number = account.accountNumber,
+                balance = account.balance,
+                bankName = account.bankName
+            )
         }
     }
 
     override suspend fun getAccountByNumber(accountNumber: String): Account? {
         return accountDao.getAccountByNumber(accountNumber)?.let {
-            Account(it.id, it.accountHolder, it.accountNumber, it.balance)
+            Account(
+                id = it.id,
+                holder = it.accountHolder,
+                number = it.accountNumber,
+                balance = it.balance,
+                bankName = it.bankName
+            )
         }
     }
 
     override suspend fun updateAccount(account: Account) {
         accountDao.updateAccount(
             AccountEntity(
-                account.id,
-                account.holder,
-                account.number,
-                account.balance
+                id = account.id,
+                accountHolder = account.holder,
+                accountNumber = account.number,
+                balance = account.balance,
+                bankName = account.bankName
             )
         )
     }
@@ -41,7 +54,8 @@ class AccountRepositoryImpl @Inject constructor(private val accountDao: AccountD
             AccountEntity(
                 accountHolder = account.holder,
                 accountNumber = account.number,
-                balance = account.balance
+                balance = account.balance,
+                bankName = account.bankName
             )
         )
     }

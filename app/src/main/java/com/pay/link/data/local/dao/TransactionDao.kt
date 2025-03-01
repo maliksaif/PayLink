@@ -18,20 +18,21 @@ interface TransactionDao {
 
     @Query(
         """
-        SELECT 
-            t.id, 
-            t.sourceAccountId, 
-            s.accountHolder AS sourceAccountName,
-            t.destinationAccountId, 
-            d.accountHolder AS destinationAccountName,
-            t.amount, 
-            t.timestamp
-        FROM transactions t
-        INNER JOIN accounts s ON t.sourceAccountId = s.id
-        INNER JOIN accounts d ON t.destinationAccountId = d.id
-        ORDER BY t.timestamp DESC
-        """
+    SELECT 
+        t.sourceAccountId, 
+        s.accountHolder AS sourceAccountName,
+        s.accountNumber AS sourceAccountNumber,
+        t.destinationAccountId, 
+        d.accountHolder AS destinationAccountName,
+        d.accountNumber AS destinationAccountNumber,
+        t.amount, 
+        t.timestamp
+    FROM transactions t
+    INNER JOIN accounts s ON t.sourceAccountId = s.id
+    INNER JOIN accounts d ON t.destinationAccountId = d.id
+    ORDER BY t.timestamp DESC
+    """
     )
-    fun getTransactionsWithAccountNames(): Flow<List<TransactionWithAccountNames>>
+    fun getTransactionsWithAccountNames(): List<TransactionWithAccountNames>
 }
 

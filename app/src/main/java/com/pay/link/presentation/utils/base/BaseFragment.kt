@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlin.reflect.KClass
 
@@ -31,30 +30,14 @@ open class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater(inflater, container, false)
-        Log.d("GenericBaseFragment", "onCreateView: Binding initialized.")
+        Log.d("BaseFragment", "onCreateView: Binding initialized.")
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        Log.d("GenericBaseFragment", "onDestroyView: Binding cleared.")
-    }
-
-    /**
-     * Navigate to another fragment safely.
-     */
-    protected fun goToNextFragment(destination: Int, bundle: Bundle? = null) {
-        try {
-            if (isAdded) {
-                findNavController().navigate(destination, bundle)
-                Log.d("GenericBaseFragment", "Navigating to destination: $destination")
-            } else {
-                Log.w("GenericBaseFragment", "Fragment is not added, cannot navigate.")
-            }
-        } catch (e: Exception) {
-            Log.e("GenericBaseFragment", "Navigation failed: ${e.message}", e)
-        }
+        Log.d("BaseFragment", "onDestroyView: Binding cleared.")
     }
 
     protected inline fun <reified VM : ViewModel> getSharedViewModel(): VM {

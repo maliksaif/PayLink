@@ -3,6 +3,7 @@ package com.pay.link.di
 import android.content.Context
 import androidx.room.Room
 import com.pay.link.data.local.AppDatabase
+import com.pay.link.data.local.MIGRATION_1_2
 import com.pay.link.data.local.dao.AccountDao
 import com.pay.link.data.local.dao.TransactionDao
 import dagger.Module
@@ -19,7 +20,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "bank_db").build()
+        return Room.databaseBuilder(context, AppDatabase::class.java, "bank_db")
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides

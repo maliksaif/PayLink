@@ -5,33 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4dp"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/_8dp"
-    app:cardElevation="@dimen/_4dp"
-    app:strokeColor="@color/gray"
-    app:strokeWidth="@dimen/_1dp">
+    app:strokeColor="@color/light_blue"
+    app:strokeWidth="@dimen/_0.5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_12dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/bank_icon"
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="@dimen/_40dp"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
             android:contentDescription="@string/image_description_bank_logo"
-            android:src="@drawable/ic_bank"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_al_rajhi_bank"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundedSquare"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/account_holder_label"
-            style="@style/TextAppearance.Material3.LabelSmall"
+            style="@style/TextAppearance.PayLink.LabelExtraSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_2dp"
+            android:layout_marginStart="@dimen/_8dp"
             android:text="@string/account_holder"
             app:layout_constraintStart_toEndOf="@id/bank_icon"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,16 +39,17 @@
 
         <TextView
             android:id="@+id/account_holder_value"
-            style="@style/TextAppearance.Material3.BodyMedium"
+            style="@style/TextAppearance.PayLink.LabelSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/account_holder_label"
             app:layout_constraintTop_toBottomOf="@id/account_holder_label"
             tools:text="John Doe" />
 
         <TextView
             android:id="@+id/account_number_label"
-            style="@style/TextAppearance.Material3.LabelSmall"
+            style="@style/TextAppearance.PayLink.LabelExtraSmall"
             android:layout_width="94dp"
             android:layout_height="19dp"
             android:text="@string/account_number"
@@ -58,12 +59,13 @@
 
         <TextView
             android:id="@+id/account_number_value"
-            style="@style/TextAppearance.Material3.BodyMedium"
+            style="@style/TextAppearance.PayLink.LabelSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLength="20"
             android:maxLines="1"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/account_number_label"
             app:layout_constraintTop_toBottomOf="@id/account_number_label"
@@ -71,7 +73,7 @@
 
         <TextView
             android:id="@+id/account_balance_label"
-            style="@style/TextAppearance.Material3.LabelSmall"
+            style="@style/TextAppearance.PayLink.LabelExtraSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/balance"
@@ -81,10 +83,11 @@
 
         <TextView
             android:id="@+id/account_balance_value"
-            style="@style/TextAppearance.Material3.TitleMedium"
+            style="@style/TextAppearance.PayLink.Headline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/green"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/account_balance_label"
             tools:text="$100.00" />

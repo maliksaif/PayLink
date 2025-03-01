@@ -6,7 +6,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.pay.link.R
 import com.pay.link.databinding.FragmentLoginBinding
@@ -18,9 +17,9 @@ import com.pay.link.presentation.ui.fragments.auth.login.LoginViewEffect.ShowSuc
 import com.pay.link.presentation.ui.fragments.auth.login.LoginViewEvent.OnEmailChanged
 import com.pay.link.presentation.ui.fragments.auth.login.LoginViewEvent.OnLoginClicked
 import com.pay.link.presentation.ui.fragments.auth.login.LoginViewEvent.OnPasswordChanged
-import com.pay.link.presentation.utils.base.BaseFragment
 import com.pay.link.presentation.utils.CustomProgressDialog
 import com.pay.link.presentation.utils.SnackBarManager
+import com.pay.link.presentation.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -47,6 +46,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 
     private fun setListeners() {
 
+        progressDialog.attachToLifecycle(viewLifecycleOwner,requireActivity())
         binding.emailEt.addTextChangedListener { viewModel.onEvent(OnEmailChanged(it.toString())) }
         binding.passwordEt.addTextChangedListener { viewModel.onEvent(OnPasswordChanged(it.toString())) }
 

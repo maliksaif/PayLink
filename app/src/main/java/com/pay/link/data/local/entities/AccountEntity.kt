@@ -8,5 +8,6 @@ data class AccountEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val accountNumber: String,
     val accountHolder: String,
-    val balance: Double
+    val balance: Double,
+    val bankName: String,
 )

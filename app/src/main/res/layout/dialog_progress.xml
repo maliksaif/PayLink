@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:visibility="visible"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:visibility="visible">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/loadingCard"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/_20dp"
+        android:backgroundTint="@color/white"
         android:padding="@dimen/_24dp"
         app:cardCornerRadius="@dimen/_12dp"
         app:cardElevation="@dimen/_4dp"
-        app:strokeColor="@color/charcoal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/light_gray"
         app:strokeWidth="@dimen/_1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:padding="@dimen/_16dp">
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progressBar"
                 android:layout_width="@dimen/_40dp"
                 android:layout_height="@dimen/_40dp"
+                android:indeterminate="true"
                 app:indicatorColor="?attr/colorPrimary"
-                app:trackColor="?attr/colorSurfaceVariant"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:trackColor="@color/light_blue" />
 
             <TextView
                 android:id="@+id/progressMessage"
@@ -41,12 +48,12 @@
                 android:text="@string/loading"
                 android:textColor="@color/charcoal"
                 android:textSize="@dimen/text_large"
-                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
