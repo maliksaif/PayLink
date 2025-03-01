@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pay.link.databinding.ItemTransactionHistoryBinding
 import com.pay.link.domain.models.TransactionWithAccountNames
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -32,10 +33,16 @@ class TransactionHistoryAdapter(
             sourceAccountNumber.text = transaction.sourceAccountNumber
             destinationAccountName.text = transaction.destinationAccountName
             destinationAccountNumber.text = transaction.destinationAccountNumber
-            transactionAmount.text = "$${transaction.amount}"
-            transactionAmount.setTextColor(
-                if (transaction.amount > 0) Color.GREEN else Color.RED
-            )
+            val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US).apply {
+                maximumFractionDigits = 2
+                minimumFractionDigits = 2
+            }
+            transactionAmount.text = currencyFormat.format(transaction.amount)
+
+            // Will be useful when we know amount was incoming or outgoing
+//            transactionAmount.setTextColor(
+//                if (transaction.amount > 0) Color.GREEN else Color.RED
+//            )
             transactionDateTime.text = formatDate(transaction.timestamp)
         }
     }
@@ -49,6 +56,7 @@ class TransactionHistoryAdapter(
 
     fun updateData(newTransactions: List<TransactionWithAccountNames>) {
         transactions = newTransactions
+        // Since not change we can do this but Diff Util is prefered same as accounts Adapter
         notifyDataSetChanged()
     }
 }

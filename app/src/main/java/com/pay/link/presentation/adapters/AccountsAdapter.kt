@@ -23,9 +23,6 @@ class AccountsAdapter(
             binding.apply {
                 accountHolderValue.text = account.holder
                 accountNumberValue.text = account.number
-//                accountBalanceValue.text =
-//                    accountBalanceValue.context.getString(R.string.currency_format, account.balance)
-
                 binding.bankIcon.setImageResource(BankName.getBankLogo(account.bankName))
 
                 val currencyFormat = NumberFormat.getCurrencyInstance(Locale.US).apply {

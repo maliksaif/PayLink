@@ -34,5 +34,7 @@
     <string name="select_destination_account">Select destination account</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="source_account">Source Account</string>
+    <string name="destination_account">Destination Account</string>
 
 </resources>

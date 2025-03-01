@@ -31,14 +31,14 @@ open class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater(inflater, container, false)
-        Log.d("GenericBaseFragment", "onCreateView: Binding initialized.")
+        Log.d("BaseFragment", "onCreateView: Binding initialized.")
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        Log.d("GenericBaseFragment", "onDestroyView: Binding cleared.")
+        Log.d("BaseFragment", "onDestroyView: Binding cleared.")
     }
 
     /**
@@ -48,12 +48,12 @@ open class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         try {
             if (isAdded) {
                 findNavController().navigate(destination, bundle)
-                Log.d("GenericBaseFragment", "Navigating to destination: $destination")
+                Log.d("BaseFragment", "Navigating to destination: $destination")
             } else {
-                Log.w("GenericBaseFragment", "Fragment is not added, cannot navigate.")
+                Log.w("BaseFragment", "Fragment is not added, cannot navigate.")
             }
         } catch (e: Exception) {
-            Log.e("GenericBaseFragment", "Navigation failed: ${e.message}", e)
+            Log.e("BaseFragment", "Navigation failed: ${e.message}", e)
         }
     }
 

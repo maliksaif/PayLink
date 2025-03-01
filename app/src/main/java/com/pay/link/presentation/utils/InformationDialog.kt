@@ -4,24 +4,20 @@ import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.pay.link.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pay.link.databinding.DialogGenericBinding
-
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
 class InformationDialog @Inject constructor(@ActivityContext private val context: Context) {
 
     interface DialogCallback {
-        /** Called when the positive button is clicked. */
         fun onPositiveClick() {}
 
-        /** Called when the negative button is clicked. */
         fun onNegativeClick() {}
 
     }
@@ -61,12 +57,12 @@ class InformationDialog @Inject constructor(@ActivityContext private val context
             negativeActionButton.isVisible = showNegativeButton
         }
 
-        val alertDialog = AlertDialog.Builder(context).apply {
-            setView(binding.root)
-            setCancelable(false)
-        }.create().apply {
-            window?.setBackgroundDrawableResource(R.drawable.rounded_background)
-        }
+
+        val alertDialog =  MaterialAlertDialogBuilder(context)
+            .setView(binding.root)
+            .setCancelable(false)
+            .create()
+
 
         binding.positiveActionButton.setOnClickListener {
             callback.onPositiveClick()

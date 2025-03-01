@@ -1,7 +1,6 @@
 package com.pay.link.presentation.ui.fragments.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
