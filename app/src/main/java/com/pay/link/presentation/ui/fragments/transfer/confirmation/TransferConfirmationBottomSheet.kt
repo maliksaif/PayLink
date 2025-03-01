@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.BundleCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pay.link.R
 import com.pay.link.databinding.BottomSheetTransferConfirmationBinding
 import com.pay.link.domain.models.Account
 import java.text.NumberFormat
@@ -28,12 +30,13 @@ class TransferConfirmationBottomSheet : BottomSheetDialogFragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NO_TITLE, R.style.BottomSheetDialogTheme)
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             amount = it.getString(ARG_AMOUNT)
-            sourceAccount = it.getSerializable(ARG_SOURCE_ACCOUNT) as? Account
-            destinationAccount = it.getSerializable(ARG_DESTINATION_ACCOUNT) as? Account
+            sourceAccount = BundleCompat.getSerializable(it,ARG_SOURCE_ACCOUNT, Account::class.java)
+            destinationAccount = BundleCompat.getSerializable(it, ARG_DESTINATION_ACCOUNT, Account::class.java)
         }
     }
 

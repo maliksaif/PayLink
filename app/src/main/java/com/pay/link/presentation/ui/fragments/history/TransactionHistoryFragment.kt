@@ -6,7 +6,9 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.pay.link.databinding.FragmentTransactionHistoryBinding
+import com.pay.link.presentation.adapters.TransactionHistoryAdapter
 import com.pay.link.presentation.ui.fragments.history.TransactionHistoryViewEffect.NavigateBack
+import com.pay.link.presentation.ui.fragments.history.TransactionHistoryViewEvent.OnBackClicked
 import com.pay.link.presentation.utils.CustomProgressDialog
 import com.pay.link.presentation.utils.SnackBarManager
 import com.pay.link.presentation.utils.base.BaseFragment
@@ -22,21 +24,28 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
 
 
     @Inject
-    lateinit var progressBar: CustomProgressDialog
+    lateinit var progressDialog: CustomProgressDialog
 
     @Inject
     lateinit var snackBarManager: SnackBarManager
+
+    private lateinit var adapter: TransactionHistoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setListeners()
+        setupAdapter()
         observeViewState()
         observeViewEffect()
     }
 
 
     private fun setListeners() {
+
+        progressDialog.attachToLifecycle(this, requireActivity())
+
+        binding.backImageView.setOnClickListener { viewModel.onEvent(OnBackClicked) }
 
     }
 
@@ -45,7 +54,7 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.viewState.collect { viewState ->
 
-                Log.d("TAG", "observeViewState: "+viewState)
+                adapter.updateData(viewState.transactions)
             }
         }
 
@@ -61,6 +70,10 @@ class TransactionHistoryFragment : BaseFragment<FragmentTransactionHistoryBindin
                 }
             }
         }
+    }
 
+    private fun setupAdapter(){
+        adapter = TransactionHistoryAdapter()
+        binding.transactionHistoryRecyclerView.adapter = adapter
     }
 }

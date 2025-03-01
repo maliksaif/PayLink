@@ -13,7 +13,6 @@ import com.pay.link.presentation.adapters.AccountsAdapter
 import com.pay.link.presentation.ui.activities.main.MainActivity
 import com.pay.link.presentation.ui.fragments.home.HomeFragmentDirections.Companion.toTransactionHistory
 import com.pay.link.presentation.ui.fragments.home.HomeFragmentDirections.Companion.toTransfer
-import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.Loading
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToSignIn
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToTransactionHistory
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToTransfer
@@ -61,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
 
     private fun setListeners() {
-
+        progressDialog.attachToLifecycle(this, requireActivity())
 
         binding.transferActionButton.setOnClickListener { viewModel.onEvent(OnTransferClicked) }
         binding.transactionHistoryActionButton.setOnClickListener {
@@ -83,6 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun observeViewState() {
         viewModel.viewModelScope.launch {
             viewModel.viewState.collectLatest { viewState ->
+                progressDialog.show(viewState.isLoading)
 
                 accountsAdapter.updateData(viewState.accounts)
             }
@@ -93,7 +93,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         viewModel.viewModelScope.launch {
             viewModel.viewEffect.collect { viewEffect ->
                 when (viewEffect) {
-                    is Loading -> progressDialog.show(viewEffect.isLoading)
                     is ShowErrorSnackbar -> snackBarManager.showErrorSnackBar(
                         binding.root,
                         viewEffect.message

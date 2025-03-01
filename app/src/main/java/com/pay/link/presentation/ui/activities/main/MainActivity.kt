@@ -1,9 +1,11 @@
 package com.pay.link.presentation.ui.activities.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -11,6 +13,8 @@ import com.pay.link.R
 import com.pay.link.databinding.ActivityMainBinding
 import com.pay.link.presentation.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,13 +38,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun observeUserAuthState(){
-        viewModel.isUserLoggedIn.observe(this) { isLoggedIn ->
-            if (isLoggedIn) {
-                navController.navigate(R.id.home_fragment)
-            } else {
-                navController.navigate(R.id.login_fragment)
+    private fun observeUserAuthState() {
+        lifecycleScope.launch {
+            viewModel.isUserLoggedIn.collectLatest { isLoggedIn ->
+                val currentDest = navController.currentDestination?.id
+                if (isLoggedIn && currentDest != R.id.home_fragment) {
+                    navController.navigate(R.id.home_fragment)
+                } else if (!isLoggedIn && currentDest != R.id.login_fragment) {
+                    navController.navigate(R.id.login_fragment)
+                }
             }
         }
     }
+
 }

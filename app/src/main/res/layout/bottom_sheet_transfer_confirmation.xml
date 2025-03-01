@@ -3,85 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    android:padding="@dimen/_16dp">
 
     <ImageButton
         android:id="@+id/close_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/_12dp"
         android:src="@drawable/ic_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
+        style="@style/TextAppearance.PayLink.Headline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/close_image_view" />
 
     <TextView
         android:id="@+id/amount_text_view_label"
+        style="@style/TextAppearance.PayLink.LabelSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_36dp"
+        android:layout_marginTop="@dimen/_24dp"
         android:text="@string/amount"
-        android:textSize="@dimen/text_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
     <TextView
         android:id="@+id/amount_text_view_value"
+        style="@style/TextAppearance.PayLink.Headline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4dp"
-        android:textSize="@dimen/text_title"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_extra_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amount_text_view_label"
         tools:text="$0.00" />
 
+
+    <TextView
+        android:id="@+id/transfer_from_label"
+        style="@style/TextAppearance.PayLink.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:text="@string/transfer_from"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_text_view_value" />
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/source_account_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/_8dp"
         app:cardElevation="@dimen/_1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/amount_text_view_value">
+        app:layout_constraintTop_toBottomOf="@+id/transfer_from_label">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_12dp">
 
+
             <TextView
                 android:id="@+id/source_account_name_value"
+                style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="John Doe" />
 
             <TextView
                 android:id="@+id/source_account_number_value"
+                style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/source_account_name_value"
                 tools:text="1234 5678 9101" />
@@ -91,32 +104,48 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_bank"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <ImageView
+    <View
         android:id="@+id/transfer_image_View"
-        android:layout_width="@dimen/_48dp"
+        android:layout_width="@dimen/_1dp"
         android:layout_height="@dimen/_48dp"
-        android:layout_marginTop="@dimen/_12dp"
-        android:src="@drawable/ic_swap"
+        android:layout_marginTop="@dimen/_20dp"
+        android:alpha="0.5"
+        android:background="@color/charcoal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/source_account_card" />
+        app:layout_constraintTop_toBottomOf="@id/source_account_card"
+        app:tint="@color/gray" />
+
+
+    <TextView
+        android:id="@+id/transfer_to_label"
+        style="@style/TextAppearance.PayLink.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        android:text="@string/transfer_to"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transfer_image_View" />
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/destination_account_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/_8dp"
         app:cardElevation="@dimen/_1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transfer_image_View">
+        app:layout_constraintTop_toBottomOf="@+id/transfer_to_label">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -125,19 +154,18 @@
 
             <TextView
                 android:id="@+id/destination_account_name_value"
+                style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Jane Smith" />
 
             <TextView
                 android:id="@+id/destination_account_number_value"
+                style="@style/TextAppearance.PayLink.LabelSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/destination_account_name_value"
                 tools:text="9876 5432 1098" />
@@ -147,6 +175,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_bank"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -157,9 +186,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm_transfer_action_button"
+        style="@style/Widget.Material3.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20dp"
+        android:layout_marginTop="@dimen/_40dp"
+        android:padding="@dimen/_16dp"
         android:text="@string/confirm_transfer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

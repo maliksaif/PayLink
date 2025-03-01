@@ -1,64 +1,62 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme -->
+<resources>
+
     <style name="Base.Theme.PayLink" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary Colors -->
+
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorPrimaryContainer">@color/light_blue</item>
         <item name="colorOnPrimaryContainer">@color/black</item>
 
-        <!-- Secondary Colors -->
         <item name="colorSecondary">@color/teal</item>
         <item name="colorOnSecondary">@color/white</item>
 
         <item name="colorSecondaryContainer">@color/pastel_green</item>
         <item name="colorOnSecondaryContainer">@color/black</item>
 
-        <!-- Background Colors -->
         <item name="android:colorBackground">@color/white</item>
         <item name="colorSurface">@color/light_gray</item>
         <item name="colorOnSurface">@color/black</item>
 
-        <!-- Error Colors -->
         <item name="colorError">@color/red</item>
         <item name="colorOnError">@color/white</item>
 
-        <!-- Outline (Borders, Dividers, etc.) -->
         <item name="colorOutline">@color/warm_gray</item>
 
-        <!-- Text Colors -->
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColorSecondary">@color/dark_gray</item>
 
-        <!-- Button Styles -->
         <item name="android:buttonStyle">@style/Widget.Material3.Button</item>
 
-        <!-- Status Bar & Navigation Bar -->
         <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/white</item>
 
         <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
         <item name="autoCompleteTextViewStyle">@style/Widget.Material3.AutoCompleteTextView.OutlinedBox</item>
 
+        <item name="font">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
 
     </style>
 
     <style name="Theme.PayLink" parent="Base.Theme.PayLink" />
+
+    <style name="TransparentOverlayTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 
     <style name="ThemeOverlay.PayLink.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 
-    <style name="CustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/blue</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
 
-    <style name="CustomAutoCompleteTextView" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:background">@color/white</item>
-    </style>
+
 
 </resources>

@@ -21,6 +21,7 @@
             android:value="MODE_NIGHT_NO" />
 
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".presentation.ui.activities.main.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -29,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

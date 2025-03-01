@@ -73,18 +73,26 @@ class TransferViewModel @Inject constructor(
                 )
             }
 
-            OnProceedClicked -> sendEffect(
-                TransferViewEffect.ShowTransferConfirmationBottomSheet(
-                    viewState.value.sourceAccount!!,
-                    viewState.value.destinationAccount!!,
-                    viewState.value.amountToTransfer
+            OnProceedClicked -> {
+
+                if (viewState.value.sourceAccount?.id == viewState.value.destinationAccount?.id) {
+                    sendEffect(TransferViewEffect.ShowErrorSnackBar("Source and destination accounts cannot be the same"))
+                    return
+                }
+
+                sendEffect(
+                    TransferViewEffect.ShowTransferConfirmationBottomSheet(
+                        viewState.value.sourceAccount!!,
+                        viewState.value.destinationAccount!!,
+                        viewState.value.amountToTransfer
+                    )
                 )
-            )
+            }
 
             OnTransferConfirmationClicked -> {
 
                 viewModelScope.launch {
-                    withContext(Dispatchers.IO){
+                    withContext(Dispatchers.IO) {
                         val transferResult = transferFundsUseCase(
                             sourceId = viewState.value.sourceAccount!!.id,
                             destinationId = viewState.value.destinationAccount!!.id,

@@ -8,42 +8,57 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.Window
 import android.widget.TextView
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.pay.link.R
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
+class CustomProgressDialog @Inject constructor() : DefaultLifecycleObserver {
 
-class CustomProgressDialog @Inject constructor(activity: Activity?) {
-    @SuppressLint("InflateParams")
-    private val progressDialog: Dialog = Dialog(requireNotNull(activity)).apply {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setCancelable(false)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        setContentView(LayoutInflater.from(activity).inflate(R.layout.dialog_progress, null).also { view ->
-            messageTextView = view.findViewById(R.id.progressMessage)
-        })
+    private var progressDialog: Dialog? = null
+    private var messageTextView: TextView? = null
+
+    fun attachToLifecycle(owner: LifecycleOwner, activity: Activity) {
+        owner.lifecycle.addObserver(this)
+        progressDialog = createDialog(activity)
     }
 
-    private var messageTextView: TextView? = null
+    private fun createDialog(activity: Activity): Dialog {
+        return Dialog(activity).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(false)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setContentView(LayoutInflater.from(activity).inflate(R.layout.dialog_progress, null).also { view ->
+                messageTextView = view.findViewById(R.id.progressMessage)
+            })
+        }
+    }
 
     fun show(isLoading: Boolean, message: String = "Loading...") {
         if (isLoading) {
-            setMessage(message)
-            if (!progressDialog.isShowing) {
-                progressDialog.show()
+            if (progressDialog?.isShowing == false) {
+                setMessage(message)
+                progressDialog?.show()
             }
         } else {
             dismiss()
         }
     }
 
-    private fun dismiss() {
-        if (progressDialog.isShowing) {
-            progressDialog.dismiss()
-        }
-    }
-
     private fun setMessage(message: String) {
         messageTextView?.text = message
     }
+
+    private fun dismiss() {
+        progressDialog?.takeIf { it.isShowing }?.dismiss()
+        progressDialog = null
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        dismiss()
+    }
 }
+
 

@@ -39,7 +39,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 ), TransferConfirmationBottomSheet.TransferConfirmationListener {
 
     @Inject
-    lateinit var progressBar: CustomProgressDialog
+    lateinit var progressDialog: CustomProgressDialog
 
     @Inject
     lateinit var snackBarManager: SnackBarManager
@@ -62,6 +62,8 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 
     private fun setListeners() {
 
+        progressDialog.attachToLifecycle(this, requireActivity())
+
         binding.backImageView.setOnClickListener { viewModel.onEvent(OnBackClicked) }
         binding.proceedActionButton.setOnClickListener { viewModel.onEvent(OnProceedClicked) }
 
@@ -77,7 +79,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
                     getString(R.string.balance_currency_format, it.balance)
 
                 binding.sourceAccountAutocompleteTextView.setText(
-                    "${it.holder} - ${it.number}",
+                    getString(R.string.account_display_format, it.holder, it.number),
                     false
                 )
                 viewModel.onEvent(OnSourceAccountSelected(it))
@@ -88,7 +90,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
             val selectedAccount = destinationAdapter.getItem(position)
             selectedAccount?.let {
                 binding.destinationAccountAutocompleteTextView.setText(
-                    "${it.holder} - ${it.number}",
+                    getString(R.string.account_display_format, it.holder, it.number),
                     false
                 )
                 viewModel.onEvent(

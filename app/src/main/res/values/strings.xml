@@ -24,9 +24,13 @@
     <string name="transfer_from">Transfer From</string>
     <string name="transfer_to">Transfer To</string>
     <string name="balance_0_0">Balance $0.0</string>
-    <string name="balance_currency_format">Balance : %1$.2f</string>
+    <string name="balance_currency_format">Balance: $%1$.2f</string>
     <string name="close">Close</string>
     <string name="confirm_transfer">Confirm Transfer</string>
     <string name="confirm">Confirm</string>
     <string name="transfer_success">Transaction completed! The amount has been transferred successfully.</string>
+    <string name="account_display_format">%1$s - %2$s</string>
+    <string name="select_source_account">Select source account</string>
+    <string name="select_destination_account">Select destination account</string>
+
 </resources>

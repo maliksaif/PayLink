@@ -50,25 +50,26 @@ class HomeViewModel @Inject constructor(
 
 
     init {
-        viewModelScope.launch {
-//            deleteAllAccountsUseCase()
-//            delay(3000)
-            checkAndGenerateMockData()
-        }
+
+        checkAndGenerateMockData()
     }
 
-    private suspend fun checkAndGenerateMockData() {
-        mutex.withLock {
-            withContext(Dispatchers.IO) {
-                val existingAccounts = getAccountsUseCase()
-                if (existingAccounts.isEmpty()) {
-                    generateMockData()
-                }
-            }
+    private fun checkAndGenerateMockData() {
 
-            delay(1000)
-            val updatedAccounts = withContext(Dispatchers.IO) { getAccountsUseCase() }
-            setState { copy(accounts = updatedAccounts) }
+        viewModelScope.launch {
+            setState { copy( isLoading = true) }
+            mutex.withLock {
+                withContext(Dispatchers.IO) {
+                    val existingAccounts = getAccountsUseCase()
+                    if (existingAccounts.isEmpty()) {
+                        generateMockData()
+                    }
+                }
+
+                delay(1000)
+                val updatedAccounts = withContext(Dispatchers.IO) { getAccountsUseCase() }
+                setState { copy(accounts = updatedAccounts, isLoading = false) }
+            }
         }
     }
 
@@ -104,11 +105,7 @@ class HomeViewModel @Inject constructor(
             }
             OnTransactionHistoryClicked -> sendEffect(NavigateToTransactionHistory)
             OnTransferClicked -> sendEffect(NavigateToTransfer)
-            OnRefresh -> {
-                viewModelScope.launch {
-                    checkAndGenerateMockData()
-                }
-            }
+            OnRefresh ->  checkAndGenerateMockData()
             OnSignOutClicked -> {
                  val response = signOutUseCase()
 
