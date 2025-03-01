@@ -1,6 +1,8 @@
 package com.pay.link.presentation.ui.activities.main
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +21,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private val viewModel by viewModels<MainViewModel>()
     private lateinit var navController: NavController
@@ -34,31 +35,34 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment?.navController ?: throw IllegalStateException("NavController not found")
 
         observeUserAuthState()
+
     }
 
     private fun observeUserAuthState() {
-        val currentDest = navController.currentDestination?.id
-        val isLoggedIn = viewModel.isUserLoggedIn()
+        viewModel.isUserLoggedInLiveData.observe(this) { isLoggedIn ->
+            Handler(Looper.getMainLooper()).post {
+                val currentDest = navController.currentDestination?.id
 
-        if (isLoggedIn && currentDest != R.id.home_fragment) {
-            navController.navigate(
-                R.id.home_fragment,
-                null,
-                NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .setPopUpTo(R.id.nav_graph, inclusive = false)
-                    .build()
-            )
-        } else if (!isLoggedIn && currentDest != R.id.login_fragment) {
-            navController.navigate(
-                R.id.login_fragment,
-                null,
-                NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .setPopUpTo(R.id.nav_graph, inclusive = false)
-                    .build()
-            )
+                if (isLoggedIn && currentDest != R.id.home_fragment) {
+                    navController.navigate(
+                        R.id.home_fragment,
+                        null,
+                        NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .setPopUpTo(R.id.nav_graph, inclusive = true)
+                            .build()
+                    )
+                } else if (!isLoggedIn && currentDest != R.id.login_fragment) {
+                    navController.navigate(
+                        R.id.login_fragment,
+                        null,
+                        NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .setPopUpTo(R.id.nav_graph, inclusive = true)
+                            .build()
+                    )
+                }
+            }
         }
     }
-
 }

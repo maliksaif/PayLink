@@ -1,18 +1,15 @@
 package com.pay.link.presentation.ui.fragments.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.pay.link.R
 import com.pay.link.databinding.FragmentHomeBinding
 import com.pay.link.presentation.adapters.AccountsAdapter
-import com.pay.link.presentation.ui.activities.main.MainActivity
-import com.pay.link.presentation.ui.fragments.home.HomeFragmentDirections.Companion.toTransactionHistory
-import com.pay.link.presentation.ui.fragments.home.HomeFragmentDirections.Companion.toTransfer
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToSignIn
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToTransactionHistory
 import com.pay.link.presentation.ui.fragments.home.HomeViewEffect.NavigateToTransfer
@@ -107,11 +104,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                     NavigateToTransfer -> navigateToTransfer()
 
                     NavigateToSignIn -> {
-
-
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
+                        findNavController().navigate(
+                            R.id.login_fragment,
+                            null,
+                            NavOptions.Builder()
+                                .setLaunchSingleTop(true)
+                                .setPopUpTo(R.id.nav_graph, inclusive = true)
+                                .build()
+                        )
                     }
                     ShowSignOutDialog -> TODO()
                 }
@@ -128,34 +128,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     }
 
-    /*
-    *
-    * Due to Fragment destroy / recreation
-    *
-    * */
-
     private fun navigateToTransfer() {
-        if(isAdded){
+        if (!isAdded || !isResumed) {
+            Log.e(TAG, "Fragment is not in a valid state for navigation")
+            return
+        }
 
-            val navController = findNavController()
-            if (navController.currentDestination?.id == R.id.home_fragment) {
-                navController.navigate(toTransfer())
-            } else Log.e(TAG, "NavController is in an invalid state")
-
-        }else
-            Log.e(TAG, "Fragment is not added to the activity")
-
+        val navController = findNavController()
+        if (navController.currentDestination?.id == R.id.home_fragment) {
+            navController.navigate(R.id.to_transfer)
+        } else {
+            Log.e(TAG, "NavController is in an invalid state: ${navController.currentDestination?.id}")
+        }
     }
 
     private fun navigateToTransactionHistory() {
-        if(isAdded) {
-            val navController = findNavController()
-            if (navController.currentDestination?.id == R.id.home_fragment) {
-                navController.navigate(toTransactionHistory())
-            } else
-                Log.e(TAG, "NavController is in an invalid state")
-        }else
-            Log.e(TAG, "Fragment is not added to the activity")
+        if (!isAdded || !isResumed) {
+            Log.e(TAG, "Fragment is not in a valid state for navigation")
+            return
+        }
+
+        val navController = findNavController()
+        if (navController.currentDestination?.id == R.id.home_fragment) {
+            navController.navigate(R.id.to_transaction_history)
+        } else {
+            Log.e(TAG, "NavController is in an invalid state: ${navController.currentDestination?.id}")
+        }
     }
 
     companion object {
