@@ -25,6 +25,7 @@ import com.pay.link.presentation.ui.fragments.transfer.TransferViewEvent.OnSourc
 import com.pay.link.presentation.ui.fragments.transfer.TransferViewEvent.OnTransferConfirmationClicked
 import com.pay.link.presentation.ui.fragments.transfer.confirmation.TransferConfirmationBottomSheet
 import com.pay.link.presentation.utils.CustomProgressDialog
+import com.pay.link.presentation.utils.InformationDialog
 import com.pay.link.presentation.utils.SnackBarManager
 import com.pay.link.presentation.utils.base.BaseFragment
 import com.pay.link.presentation.utils.sharedviewmodel.TransferSharedViewModel
@@ -51,6 +52,8 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 
     private val transferSharedViewModel: TransferSharedViewModel by activityViewModels()
 
+    @Inject
+    lateinit var informationDialog: InformationDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -108,7 +111,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
                 progressDialog.show(viewState.isLoading)
 
                 binding.proceedActionButton.isEnabled = viewState.isTransferButtonEnabled
-                binding.amountEditText.error = viewState.amountError
+                binding.amountTextInputLayout.error = viewState.amountError
 
             }
         }
@@ -143,14 +146,7 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 
                     is SetSourceDestinationAdapters -> setupAdapters(viewEffect.accounts)
                     is OnTransferSuccess -> {
-                        snackBarManager.showSuccessSnackBar(
-                            binding.root,
-                            getString(R.string.transfer_success)
-                        )
-
-                        transferSharedViewModel.notifyTransferSuccess()
-                        transferBottomSheet?.closeBottomSheet()
-                        findNavController().navigateUp()
+                        showDialog("Transaction Successful", getString(R.string.transfer_success))
                     }
                 }
             }
@@ -183,6 +179,26 @@ class TransferFragment : BaseFragment<FragmentTransferBinding, TransferViewModel
 
     override fun onTransferConfirmed() {
         viewModel.onEvent(OnTransferConfirmationClicked)
+    }
+
+    private fun showDialog(title: String, message: String) {
+
+        informationDialog.showDialog(
+            title = title,
+            subTitle = message,
+            positiveButtonText = getString(R.string.ok),
+            negativeButtonText = null,
+            showNegativeButton = false,
+            lifecycleOwner = this,
+            callback = object : InformationDialog.DialogCallback {
+                override fun onPositiveClick() {
+                    super.onPositiveClick()
+                    transferSharedViewModel.notifyTransferSuccess()
+                    transferBottomSheet?.closeBottomSheet()
+                    findNavController().navigateUp()
+                }
+            },
+            )
     }
 
 }
