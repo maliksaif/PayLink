@@ -12,6 +12,10 @@ PayLink is a demo fintech application that simulates login authentication, fund 
 ## 🏗 Project Architecture
 This project follows Clean Architecture with the MVVM (Model-View-ViewModel) pattern for better code separation and maintainability.
 
+- **ViewState:** Used to manage UI state updates. The ViewState reflects the current state of the UI and is updated by the ViewModel as data changes occur.
+- **ViewEffect:** Handles navigation and one-time actions. It provides transient events to be presented to the user (for example, navigation actions or showing a toast message).
+- **ViewEvent:** Captures single-click events or any one-time interactions that the UI needs to process. These events are consumed once and not retained in the ViewState.
+
 ### 🛠 Tech Stack
 - **UI:** XML-based layouts
 - **Architecture:** Clean Architecture with MVVM
